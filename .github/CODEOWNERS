@@ -1,0 +1,20 @@
+# Default owners for everything
+* @JeromySt
+
+# Domain layer
+/src/PhotostaxAiCurator.Domain/ @JeromySt
+
+# Services layer
+/src/PhotostaxAiCurator.Services/ @JeromySt
+
+# Infrastructure layer
+/src/PhotostaxAiCurator.Infrastructure/ @JeromySt
+
+# MAUI App
+/src/PhotostaxAiCurator.App/ @JeromySt
+
+# Tests
+/tests/ @JeromySt
+
+# CI/CD and GitHub configuration
+/.github/ @JeromySt
