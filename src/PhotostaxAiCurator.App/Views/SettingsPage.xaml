@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PhotostaxAiCurator.App.ViewModels"
+             x:Class="PhotostaxAiCurator.App.Views.SettingsPage"
+             x:DataType="vm:SettingsViewModel"
+             Title="Settings">
+
+    <ScrollView Padding="20">
+        <VerticalStackLayout Spacing="20" MaximumWidthRequest="600">
+
+            <Label Text="⚙️ Settings" FontSize="28" FontAttributes="Bold" />
+
+            <!-- OpenAI Configuration -->
+            <Frame Padding="15" CornerRadius="8" BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#2D2D2D}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="OpenAI Configuration" FontSize="18" FontAttributes="Bold" />
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="API Key" FontSize="12" FontAttributes="Bold" />
+                        <Entry Text="{Binding ApiKey}" IsPassword="True" Placeholder="sk-..." />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="Model" FontSize="12" FontAttributes="Bold" />
+                        <Picker SelectedItem="{Binding SelectedModel}" ItemsSource="{Binding AvailableModels}" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Confidence Thresholds -->
+            <Frame Padding="15" CornerRadius="8" BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#2D2D2D}">
+                <VerticalStackLayout Spacing="12">
+                    <Label Text="Confidence Thresholds" FontSize="18" FontAttributes="Bold" />
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="{Binding AutoApproveThreshold, StringFormat='Auto-Approve: {0:P0}'}" FontSize="12" />
+                        <Slider Minimum="0.5" Maximum="1.0" Value="{Binding AutoApproveThreshold}" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="{Binding MediumThreshold, StringFormat='Medium Confidence: {0:P0}'}" FontSize="12" />
+                        <Slider Minimum="0.1" Maximum="0.8" Value="{Binding MediumThreshold}" />
+                    </VerticalStackLayout>
+
+                    <VerticalStackLayout Spacing="4">
+                        <Label Text="{Binding MaxConcurrency, StringFormat='Max Concurrent Requests: {0}'}" FontSize="12" />
+                        <Slider Minimum="1" Maximum="10" Value="{Binding MaxConcurrencyDouble}" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Save Button -->
+            <Button Text="💾 Save Settings"
+                    Command="{Binding SaveCommand}"
+                    BackgroundColor="#6750A4" TextColor="White"
+                    CornerRadius="8" HeightRequest="50" />
+
+            <Label Text="{Binding StatusMessage}" FontSize="14" TextColor="Green"
+                   HorizontalOptions="Center" IsVisible="{Binding HasStatusMessage}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

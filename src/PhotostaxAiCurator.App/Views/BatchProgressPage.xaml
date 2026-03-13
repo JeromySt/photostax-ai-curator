@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:PhotostaxAiCurator.App.ViewModels"
+             x:Class="PhotostaxAiCurator.App.Views.BatchProgressPage"
+             x:DataType="vm:BatchProgressViewModel"
+             Title="AI Analysis Progress">
+
+    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+
+        <Label Text="🤖 Analyzing Photos..." FontSize="28" FontAttributes="Bold" HorizontalOptions="Center" />
+
+        <!-- Current Stack -->
+        <Label Text="{Binding CurrentStackId, StringFormat='Processing: {0}'}"
+               FontSize="16" HorizontalOptions="Center" TextColor="Gray" />
+
+        <!-- Progress Bar -->
+        <ProgressBar Progress="{Binding Progress}" ProgressColor="#6750A4" HeightRequest="12" />
+        <Label Text="{Binding ProgressText}" FontSize="16" HorizontalOptions="Center" />
+
+        <!-- Stats -->
+        <Grid ColumnDefinitions="*,*,*" ColumnSpacing="15" HorizontalOptions="Center" WidthRequest="500">
+            <Frame Grid.Column="0" Padding="10" BackgroundColor="#E8F5E9" CornerRadius="8">
+                <VerticalStackLayout>
+                    <Label Text="{Binding AutoApproved}" FontSize="24" FontAttributes="Bold" TextColor="#2E7D32" HorizontalOptions="Center" />
+                    <Label Text="Auto-Approved" FontSize="11" TextColor="#388E3C" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Grid.Column="1" Padding="10" BackgroundColor="#FFF3E0" CornerRadius="8">
+                <VerticalStackLayout>
+                    <Label Text="{Binding PendingReview}" FontSize="24" FontAttributes="Bold" TextColor="#E65100" HorizontalOptions="Center" />
+                    <Label Text="Needs Review" FontSize="11" TextColor="#EF6C00" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+            <Frame Grid.Column="2" Padding="10" BackgroundColor="#FFEBEE" CornerRadius="8">
+                <VerticalStackLayout>
+                    <Label Text="{Binding Failed}" FontSize="24" FontAttributes="Bold" TextColor="#C62828" HorizontalOptions="Center" />
+                    <Label Text="Failed" FontSize="11" TextColor="#D32F2F" HorizontalOptions="Center" />
+                </VerticalStackLayout>
+            </Frame>
+        </Grid>
+
+        <!-- Cancel Button -->
+        <Button Text="Cancel"
+                Command="{Binding CancelCommand}"
+                BackgroundColor="#B00020" TextColor="White"
+                CornerRadius="8" HorizontalOptions="Center" WidthRequest="200" />
+    </VerticalStackLayout>
+</ContentPage>

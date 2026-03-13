@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/PhotostaxAiCurator.App/PhotostaxAiCurator.App.csproj" />
+    <Project Path="src/PhotostaxAiCurator.Domain/PhotostaxAiCurator.Domain.csproj" />
+    <Project Path="src/PhotostaxAiCurator.Infrastructure/PhotostaxAiCurator.Infrastructure.csproj" />
+    <Project Path="src/PhotostaxAiCurator.Services/PhotostaxAiCurator.Services.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/PhotostaxAiCurator.Domain.Tests/PhotostaxAiCurator.Domain.Tests.csproj" />
+    <Project Path="tests/PhotostaxAiCurator.Services.Tests/PhotostaxAiCurator.Services.Tests.csproj" />
+  </Folder>
+</Solution>
