@@ -1,0 +1,14 @@
+<Project>
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Authors>JeromySt</Authors>
+    <Company>JeromySt</Company>
+    <Copyright>Copyright (c) 2026 JeromySt</Copyright>
+    <RepositoryUrl>https://github.com/JeromySt/photostax-ai-curator</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+</Project>
