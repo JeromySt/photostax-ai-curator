@@ -12,7 +12,7 @@
             <Label Text="⚙️ Settings" FontSize="28" FontAttributes="Bold" />
 
             <!-- OpenAI Configuration -->
-            <Frame Padding="15" CornerRadius="8" BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#2D2D2D}">
+            <Border Padding="15" StrokeShape="RoundRectangle 8,8,8,8" Stroke="Transparent" BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#2D2D2D}">
                 <VerticalStackLayout Spacing="12">
                     <Label Text="OpenAI Configuration" FontSize="18" FontAttributes="Bold" />
 
@@ -26,10 +26,10 @@
                         <Picker SelectedItem="{Binding SelectedModel}" ItemsSource="{Binding AvailableModels}" />
                     </VerticalStackLayout>
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
             <!-- Confidence Thresholds -->
-            <Frame Padding="15" CornerRadius="8" BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#2D2D2D}">
+            <Border Padding="15" StrokeShape="RoundRectangle 8,8,8,8" Stroke="Transparent" BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#2D2D2D}">
                 <VerticalStackLayout Spacing="12">
                     <Label Text="Confidence Thresholds" FontSize="18" FontAttributes="Bold" />
 
@@ -48,7 +48,7 @@
                         <Slider Minimum="1" Maximum="10" Value="{Binding MaxConcurrencyDouble}" />
                     </VerticalStackLayout>
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
 
             <!-- Save Button -->
             <Button Text="💾 Save Settings"

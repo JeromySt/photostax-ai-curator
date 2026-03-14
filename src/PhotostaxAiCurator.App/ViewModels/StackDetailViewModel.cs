@@ -6,6 +6,9 @@ using PhotostaxAiCurator.Domain.Models;
 
 namespace PhotostaxAiCurator.App.ViewModels;
 
+/// <summary>Simple display model for EXIF tag key-value pairs.</summary>
+public record ExifTagItem(string Key, string Value);
+
 public partial class StackDetailViewModel : ObservableObject
 {
     private readonly IPhotostaxAdapter _photostax;
@@ -31,7 +34,7 @@ public partial class StackDetailViewModel : ObservableObject
     [ObservableProperty] private string? _aiMood;
     [ObservableProperty] private double _aiConfidence;
 
-    public ObservableCollection<KeyValuePair<string, string>> ExifTags { get; } = [];
+    public ObservableCollection<ExifTagItem> ExifTags { get; } = [];
 
     public StackDetailViewModel(IPhotostaxAdapter photostax, IEnrichmentPipeline pipeline)
     {
@@ -57,7 +60,7 @@ public partial class StackDetailViewModel : ObservableObject
 
         ExifTags.Clear();
         foreach (var tag in _stack.ExifTags)
-            ExifTags.Add(tag);
+            ExifTags.Add(new ExifTagItem(tag.Key, tag.Value));
     }
 
     [RelayCommand]
@@ -81,7 +84,7 @@ public partial class StackDetailViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Analysis Error", ex.Message, "OK");
+            await Shell.Current.DisplayAlertAsync("Analysis Error", ex.Message, "OK");
         }
     }
 }

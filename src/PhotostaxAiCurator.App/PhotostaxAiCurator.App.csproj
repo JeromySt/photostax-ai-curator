@@ -10,6 +10,11 @@
 		<SingleProject>true</SingleProject>
 		<MauiXamlInflator>SourceGen</MauiXamlInflator>
 
+		<!-- Suppress warnings for CommunityToolkit.Mvvm source-generated properties:
+		     MVVMTK0045: WinRT AOT partial property suggestion (toolkit 8.4.0 generator doesn't support partial properties with .NET 10)
+		     MAUIG2045: Compiled bindings can't resolve source-generated properties (runtime falls back to reflection) -->
+		<NoWarn>$(NoWarn);MVVMTK0045;MAUIG2045</NoWarn>
+
 		<!-- App metadata -->
 		<ApplicationTitle>PhotoStax AI Curator</ApplicationTitle>
 		<ApplicationId>com.jeromyst.photostax.aicurator</ApplicationId>

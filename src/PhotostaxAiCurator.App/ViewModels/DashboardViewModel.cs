@@ -49,7 +49,7 @@ public partial class DashboardViewModel : ObservableObject
 
         if (approved.Count == 0)
         {
-            await Shell.Current.DisplayAlert("Nothing to Write", "No approved items to write.", "OK");
+            await Shell.Current.DisplayAlertAsync("Nothing to Write", "No approved items to write.", "OK");
             return;
         }
 
@@ -59,6 +59,6 @@ public partial class DashboardViewModel : ObservableObject
             Written++;
         }
 
-        await Shell.Current.DisplayAlert("Done", $"Wrote metadata for {approved.Count} stacks.", "OK");
+        await Shell.Current.DisplayAlertAsync("Done", $"Wrote metadata for {approved.Count} stacks.", "OK");
     }
 }

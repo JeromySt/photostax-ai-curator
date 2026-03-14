@@ -22,15 +22,15 @@
 
                 <!-- Left: Images -->
                 <VerticalStackLayout Grid.Column="0" Spacing="10">
-                    <Frame Padding="5" CornerRadius="8">
+                    <Border Padding="5" StrokeShape="RoundRectangle 8,8,8,8" Stroke="Transparent">
                         <Image Source="{Binding FrontImageSource}" HeightRequest="300" Aspect="AspectFit" />
-                    </Frame>
-                    <Frame Padding="5" CornerRadius="8" IsVisible="{Binding HasBackImage}">
+                    </Border>
+                    <Border Padding="5" StrokeShape="RoundRectangle 8,8,8,8" Stroke="Transparent" IsVisible="{Binding HasBackImage}">
                         <VerticalStackLayout>
                             <Label Text="📝 Back of Photo" FontAttributes="Bold" FontSize="12" />
                             <Image Source="{Binding BackImageSource}" HeightRequest="200" Aspect="AspectFit" />
                         </VerticalStackLayout>
-                    </Frame>
+                    </Border>
                 </VerticalStackLayout>
 
                 <!-- Right: AI Suggestions (editable) -->
@@ -74,9 +74,9 @@
                         </VerticalStackLayout>
 
                         <!-- Confidence Indicator -->
-                        <Frame Padding="10" CornerRadius="8" BackgroundColor="{Binding ConfidenceBadgeColor}">
+                        <Border Padding="10" StrokeShape="RoundRectangle 8,8,8,8" Stroke="Transparent" BackgroundColor="{Binding ConfidenceBadgeColor}">
                             <Label Text="{Binding ConfidenceText}" TextColor="White" FontAttributes="Bold" HorizontalOptions="Center" />
-                        </Frame>
+                        </Border>
 
                         <!-- Review Reason -->
                         <Label Text="{Binding ReviewReason}" FontSize="12" TextColor="Gray"

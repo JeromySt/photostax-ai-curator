@@ -20,24 +20,24 @@
 
         <!-- Stats -->
         <Grid ColumnDefinitions="*,*,*" ColumnSpacing="15" HorizontalOptions="Center" WidthRequest="500">
-            <Frame Grid.Column="0" Padding="10" BackgroundColor="#E8F5E9" CornerRadius="8">
+            <Border Grid.Column="0" Padding="10" BackgroundColor="#E8F5E9" StrokeShape="RoundRectangle 8,8,8,8" Stroke="Transparent">
                 <VerticalStackLayout>
                     <Label Text="{Binding AutoApproved}" FontSize="24" FontAttributes="Bold" TextColor="#2E7D32" HorizontalOptions="Center" />
                     <Label Text="Auto-Approved" FontSize="11" TextColor="#388E3C" HorizontalOptions="Center" />
                 </VerticalStackLayout>
-            </Frame>
-            <Frame Grid.Column="1" Padding="10" BackgroundColor="#FFF3E0" CornerRadius="8">
+            </Border>
+            <Border Grid.Column="1" Padding="10" BackgroundColor="#FFF3E0" StrokeShape="RoundRectangle 8,8,8,8" Stroke="Transparent">
                 <VerticalStackLayout>
                     <Label Text="{Binding PendingReview}" FontSize="24" FontAttributes="Bold" TextColor="#E65100" HorizontalOptions="Center" />
                     <Label Text="Needs Review" FontSize="11" TextColor="#EF6C00" HorizontalOptions="Center" />
                 </VerticalStackLayout>
-            </Frame>
-            <Frame Grid.Column="2" Padding="10" BackgroundColor="#FFEBEE" CornerRadius="8">
+            </Border>
+            <Border Grid.Column="2" Padding="10" BackgroundColor="#FFEBEE" StrokeShape="RoundRectangle 8,8,8,8" Stroke="Transparent">
                 <VerticalStackLayout>
                     <Label Text="{Binding Failed}" FontSize="24" FontAttributes="Bold" TextColor="#C62828" HorizontalOptions="Center" />
                     <Label Text="Failed" FontSize="11" TextColor="#D32F2F" HorizontalOptions="Center" />
                 </VerticalStackLayout>
-            </Frame>
+            </Border>
         </Grid>
 
         <!-- Cancel Button -->

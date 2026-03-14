@@ -37,7 +37,7 @@ public partial class ScanViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Error", $"Failed to pick folder: {ex.Message}", "OK");
+            await Shell.Current.DisplayAlertAsync("Error", $"Failed to pick folder: {ex.Message}", "OK");
         }
     }
 
@@ -58,7 +58,7 @@ public partial class ScanViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await Shell.Current.DisplayAlert("Scan Error", ex.Message, "OK");
+            await Shell.Current.DisplayAlertAsync("Scan Error", ex.Message, "OK");
         }
     }
 
