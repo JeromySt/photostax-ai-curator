@@ -52,14 +52,11 @@ jobs:
         dotnet test tests/PhotostaxAiCurator.Domain.Tests/PhotostaxAiCurator.Domain.Tests.csproj --no-build --configuration Release --verbosity normal
         dotnet test tests/PhotostaxAiCurator.Services.Tests/PhotostaxAiCurator.Services.Tests.csproj --no-build --configuration Release --verbosity normal
 
-  # Build MAUI app on platforms that support it (Windows and macOS only)
+  # Build MAUI app on Windows (only platform with full MAUI CI support currently)
   build-maui:
     permissions:
       contents: read
-    strategy:
-      matrix:
-        os: [windows-latest, macos-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v6
@@ -82,8 +79,8 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build MAUI app
-      run: dotnet build src/PhotostaxAiCurator.App/PhotostaxAiCurator.App.csproj --configuration Release
+    - name: Build MAUI app (Windows)
+      run: dotnet build src/PhotostaxAiCurator.App/PhotostaxAiCurator.App.csproj --configuration Release -f net10.0-windows10.0.19041.0
 
   security:
     permissions:
