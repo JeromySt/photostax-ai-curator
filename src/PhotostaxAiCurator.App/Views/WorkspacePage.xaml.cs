@@ -2,9 +2,9 @@ using PhotostaxAiCurator.App.ViewModels;
 
 namespace PhotostaxAiCurator.App.Views;
 
-public partial class ScanPage : ContentPage
+public partial class WorkspacePage : ContentPage
 {
-    public ScanPage(ScanViewModel viewModel)
+    public WorkspacePage(WorkspaceViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;

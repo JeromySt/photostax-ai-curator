@@ -33,19 +33,11 @@ public static class MauiProgram
         builder.Services.AddAiCuratorInfrastructure();
 
         // Register ViewModels
-        builder.Services.AddTransient<ScanViewModel>();
-        builder.Services.AddTransient<DashboardViewModel>();
-        builder.Services.AddTransient<StackDetailViewModel>();
-        builder.Services.AddTransient<ReviewViewModel>();
-        builder.Services.AddTransient<BatchProgressViewModel>();
+        builder.Services.AddSingleton<WorkspaceViewModel>();
         builder.Services.AddTransient<SettingsViewModel>();
 
         // Register Pages
-        builder.Services.AddTransient<ScanPage>();
-        builder.Services.AddTransient<DashboardPage>();
-        builder.Services.AddTransient<StackDetailPage>();
-        builder.Services.AddTransient<ReviewPage>();
-        builder.Services.AddTransient<BatchProgressPage>();
+        builder.Services.AddTransient<WorkspacePage>();
         builder.Services.AddTransient<SettingsPage>();
 
 #if DEBUG
