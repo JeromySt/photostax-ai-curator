@@ -7,28 +7,28 @@
     Title="PhotoStax AI Curator"
     Shell.FlyoutBehavior="Flyout">
 
-    <FlyoutItem Title="Scan" Icon="{OnPlatform Default=''}">
+    <FlyoutItem Title="Scan">
         <ShellContent
             Title="Scan Photos"
             ContentTemplate="{DataTemplate views:ScanPage}"
             Route="ScanPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Dashboard" Icon="{OnPlatform Default=''}">
+    <FlyoutItem Title="Dashboard">
         <ShellContent
             Title="Dashboard"
             ContentTemplate="{DataTemplate views:DashboardPage}"
             Route="DashboardPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Review" Icon="{OnPlatform Default=''}">
+    <FlyoutItem Title="Review">
         <ShellContent
             Title="Review Queue"
             ContentTemplate="{DataTemplate views:ReviewPage}"
             Route="ReviewPage" />
     </FlyoutItem>
 
-    <FlyoutItem Title="Settings" Icon="{OnPlatform Default=''}">
+    <FlyoutItem Title="Settings">
         <ShellContent
             Title="Settings"
             ContentTemplate="{DataTemplate views:SettingsPage}"
