@@ -15,7 +15,7 @@
     <!-- MAUI -->
     <PackageVersion Include="CommunityToolkit.Maui" Version="14.0.1" />
     <PackageVersion Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageVersion Include="Microsoft.Maui.Controls" Version="10.0.41" />
+    <PackageVersion Include="Microsoft.Maui.Controls" Version="10.0.50" />
 
     <!-- Photostax -->
     <PackageVersion Include="Photostax" Version="0.1.6" />
