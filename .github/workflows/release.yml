@@ -16,9 +16,6 @@ jobs:
           - os: macos-latest
             rid: osx-arm64
             artifact: photostax-ai-curator-macos-arm64
-          - os: ubuntu-latest
-            rid: linux-x64
-            artifact: photostax-ai-curator-linux-x64
     runs-on: ${{ matrix.os }}
     permissions:
       contents: read

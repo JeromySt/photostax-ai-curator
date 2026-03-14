@@ -7,12 +7,58 @@ on:
     branches: [ main ]
 
 jobs:
-  build-and-test:
+  # Build and test class libraries on all platforms (no MAUI needed)
+  build:
     permissions:
       contents: read
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v6
+
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v5
+      with:
+        dotnet-version: '10.0.x'
+
+    - name: Cache NuGet packages
+      uses: actions/cache@v5
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
+        restore-keys: ${{ runner.os }}-nuget-
+
+    - name: Restore dependencies
+      run: |
+        dotnet restore src/PhotostaxAiCurator.Domain/PhotostaxAiCurator.Domain.csproj
+        dotnet restore src/PhotostaxAiCurator.Services/PhotostaxAiCurator.Services.csproj
+        dotnet restore src/PhotostaxAiCurator.Infrastructure/PhotostaxAiCurator.Infrastructure.csproj
+        dotnet restore tests/PhotostaxAiCurator.Domain.Tests/PhotostaxAiCurator.Domain.Tests.csproj
+        dotnet restore tests/PhotostaxAiCurator.Services.Tests/PhotostaxAiCurator.Services.Tests.csproj
+
+    - name: Build
+      run: |
+        dotnet build src/PhotostaxAiCurator.Domain/PhotostaxAiCurator.Domain.csproj --no-restore --configuration Release
+        dotnet build src/PhotostaxAiCurator.Services/PhotostaxAiCurator.Services.csproj --no-restore --configuration Release
+        dotnet build src/PhotostaxAiCurator.Infrastructure/PhotostaxAiCurator.Infrastructure.csproj --no-restore --configuration Release
+        dotnet build tests/PhotostaxAiCurator.Domain.Tests/PhotostaxAiCurator.Domain.Tests.csproj --no-restore --configuration Release
+        dotnet build tests/PhotostaxAiCurator.Services.Tests/PhotostaxAiCurator.Services.Tests.csproj --no-restore --configuration Release
+
+    - name: Test
+      run: |
+        dotnet test tests/PhotostaxAiCurator.Domain.Tests/PhotostaxAiCurator.Domain.Tests.csproj --no-build --configuration Release --verbosity normal
+        dotnet test tests/PhotostaxAiCurator.Services.Tests/PhotostaxAiCurator.Services.Tests.csproj --no-build --configuration Release --verbosity normal
+
+  # Build MAUI app on platforms that support it (Windows and macOS only)
+  build-maui:
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest]
     runs-on: ${{ matrix.os }}
 
     steps:
@@ -30,17 +76,14 @@ jobs:
       uses: actions/cache@v5
       with:
         path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/*.csproj') }}
-        restore-keys: ${{ runner.os }}-nuget-
+        key: ${{ runner.os }}-nuget-maui-${{ hashFiles('**/*.csproj') }}
+        restore-keys: ${{ runner.os }}-nuget-maui-
 
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Build
-      run: dotnet build --no-restore --configuration Release
-
-    - name: Test
-      run: dotnet test --no-build --configuration Release --verbosity normal
+    - name: Build MAUI app
+      run: dotnet build src/PhotostaxAiCurator.App/PhotostaxAiCurator.App.csproj --configuration Release
 
   security:
     permissions:
@@ -55,21 +98,24 @@ jobs:
       with:
         dotnet-version: '10.0.x'
 
-    - name: Install MAUI workload
-      run: dotnet workload install maui
-
-    - name: Restore dependencies
-      run: dotnet restore
+    - name: Restore non-MAUI projects
+      run: |
+        dotnet restore src/PhotostaxAiCurator.Domain/PhotostaxAiCurator.Domain.csproj
+        dotnet restore src/PhotostaxAiCurator.Services/PhotostaxAiCurator.Services.csproj
+        dotnet restore src/PhotostaxAiCurator.Infrastructure/PhotostaxAiCurator.Infrastructure.csproj
 
     - name: Check for vulnerable packages
-      run: dotnet list package --vulnerable --include-transitive
+      run: |
+        dotnet list src/PhotostaxAiCurator.Domain/PhotostaxAiCurator.Domain.csproj package --vulnerable --include-transitive
+        dotnet list src/PhotostaxAiCurator.Services/PhotostaxAiCurator.Services.csproj package --vulnerable --include-transitive
+        dotnet list src/PhotostaxAiCurator.Infrastructure/PhotostaxAiCurator.Infrastructure.csproj package --vulnerable --include-transitive
       continue-on-error: true
 
   # Auto-create pre-release on push to main
   prerelease:
     name: Create Pre-release
-    needs: [build-and-test]
-    runs-on: ubuntu-latest
+    needs: [build, build-maui]
+    runs-on: windows-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     permissions:
       contents: write
@@ -92,6 +138,7 @@ jobs:
 
     - name: Get version and generate tag
       id: version
+      shell: bash
       run: |
         VERSION=$(grep -oPm1 '(?<=<Version>)[^<]+' src/PhotostaxAiCurator.App/PhotostaxAiCurator.App.csproj || echo "0.1.0")
         SHORT_SHA=$(git rev-parse --short HEAD)
